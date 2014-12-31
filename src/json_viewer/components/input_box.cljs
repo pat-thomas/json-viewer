@@ -4,12 +4,12 @@
   (:require-macros [om-utils.core :refer [defcomponent]]))
 
 (defn submit-fn
-  [e]
-  (println e))
+  [e data]
+  (println (:json data)))
 
 (defcomponent input-box-submit-button
   (render
-   (dom/button #js {:onClick submit-fn} "Inspect JSON.")))
+   (dom/button #js {:onClick #(submit-fn % data)} "Inspect JSON.")))
 
 (defn update-json
   [e data]
