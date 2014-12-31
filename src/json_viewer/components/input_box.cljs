@@ -5,7 +5,9 @@
 
 (defn submit-fn
   [e data]
-  (println (:json data)))
+  (println (:json data))
+  (om/transact! data :show-json (fn [_]
+                                  true)))
 
 (defcomponent input-box-submit-button
   (render
