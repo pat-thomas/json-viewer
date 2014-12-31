@@ -3,6 +3,8 @@
             [json-viewer.state          :as state]
             [json-viewer.components.app :as app]))
 
+(enable-console-print!)
+
 (defn init
   []
   (om/root
