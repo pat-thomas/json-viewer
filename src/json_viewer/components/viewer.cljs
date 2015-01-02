@@ -5,4 +5,7 @@
 
 (defcomponent viewer
   (render
-   (dom/div nil "some stuff will show up here")))
+   (when-let [json (:json data)]
+     (dom/div nil (try (JSON/parse (str "\"" json "\""))
+                       (catch js/Error ex
+                         "Invalid json"))))))
