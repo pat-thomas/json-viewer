@@ -20,5 +20,5 @@
 
 (defcomponent input-box
   (render
-   (dom/textarea #js {:placeholder "text goes here"
+   (dom/textarea #js {:placeholder "Enter JSON here"
                       :onChange    #(update-json % data)})))
