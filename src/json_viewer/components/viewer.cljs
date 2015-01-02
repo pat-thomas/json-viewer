@@ -6,6 +6,4 @@
 (defcomponent viewer
   (render
    (when-let [json (:json data)]
-     (dom/div nil (try (JSON/parse (str "\"" json "\""))
-                       (catch js/Error ex
-                         "Invalid json"))))))
+     (dom/div nil json))))

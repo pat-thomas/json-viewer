@@ -9,6 +9,4 @@
   (render
    (dom/div nil
             (om/build input-box/input-box data)
-            (om/build input-box/input-box-submit-button data)
-            (when (:show-json data)
-              (om/build viewer/viewer data)))))
+            (om/build viewer/viewer data))))

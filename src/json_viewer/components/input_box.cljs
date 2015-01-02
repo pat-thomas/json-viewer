@@ -3,16 +3,6 @@
             [om.dom  :as dom :include-macros true])
   (:require-macros [om-utils.core :refer [defcomponent]]))
 
-(defn submit-fn
-  [e data]
-  (println (:json data))
-  (om/transact! data :show-json (fn [_]
-                                  true)))
-
-(defcomponent input-box-submit-button
-  (render
-   (dom/button #js {:onClick #(submit-fn % data)} "Inspect JSON.")))
-
 (defn update-json
   [e data]
   (om/transact! data :json (fn [_]
