@@ -7,7 +7,10 @@
 
 (defcomponent container
   (render
-   (dom/div nil
-            (om/build input-box/input-box data)
-            (om/build viewer/toggle-error-message-button data) 
-            (om/build viewer/viewer data))))
+   (let [build (fn [component]
+                 (om/build component data))]
+     (dom/div nil
+              (build viewer/debugger)
+              (build input-box/input-box)
+              (build viewer/toggle-error-message-button) 
+              (build viewer/viewer)))))

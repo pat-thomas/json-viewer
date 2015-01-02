@@ -9,22 +9,29 @@
   (let [r (transit/reader :json)]
     (transit/read r raw-json)))
 
-(defn display-child-nodes
-  [])
+(defn calc-new-node-path
+  [node-path k]
+  (println node-path)
+  (conj node-path k))
 
 (defcomponent json-node
   (render
    (dom/div #js {:className   "js-node"
-                 :onMouseOver display-child-nodes}
+                 :onMouseOver (fn [e]
+                                (om/transact! data :node-path #(calc-new-node-path % (:node-text opts))))}
             (:node-text opts))))
 
 (defn build-nodes
-  [data raw-json]
+  [raw-json data opts]
   (let [clj-ds      (parse-json raw-json)
         keys-in-map (map (fn [k]
                            (name k))
                          (keys clj-ds))]
     (apply dom/div
            #js {:id "node-container"}
-           (map #(om/build json-node data {:opts {:node-text %}})
-                keys-in-map))))
+           (map
+            (fn [node-text]
+              (om/build json-node
+                        data
+                        {:opts {:node-text node-text}}))
+            keys-in-map))))
