@@ -9,4 +9,5 @@
   (render
    (dom/div nil
             (om/build input-box/input-box data)
+            (om/build viewer/toggle-error-message-button data) 
             (om/build viewer/viewer data))))
