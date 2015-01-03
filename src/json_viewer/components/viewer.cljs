@@ -9,8 +9,6 @@
    (dom/button #js {:onClick #(om/transact! data :error-message-enabled not)}
                "Toggle error message.")))
 
-
-
 (defcomponent viewer
   (render
    (when-let [json (:json data)]
