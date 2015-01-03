@@ -20,11 +20,10 @@
 
 (defn build-nodes
   [data raw-json]
-  (let [clj-ds      (parse-json raw-json)
-        keys-in-map (map (fn [k]
-                           (name k))
-                         (keys clj-ds))]
-    (apply dom/div
-           #js {:id "node-container"}
-           (map #(om/build json-node data {:opts {:node-text %}})
-                keys-in-map))))
+  (->> raw-json
+       parse-json
+       keys
+       (map name)
+       (map (fn [node-text]
+              (om/build json-node data {:opts {:node-text node-text}})))
+       (apply dom/div #js {:id "node-container"})))
