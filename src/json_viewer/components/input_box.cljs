@@ -5,8 +5,7 @@
 
 (defn update-json
   [e data]
-  (om/transact! data :json (fn [_]
-                             (.. e -target -value))))
+  (om/transact! data :json #(.. e -target -value)))
 
 (defcomponent input-box
   (render
