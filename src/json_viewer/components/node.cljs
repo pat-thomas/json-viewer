@@ -1,19 +1,14 @@
 (ns json-viewer.components.node
-  (:require [om.core           :as om  :include-macros true]
-            [om.dom            :as dom :include-macros true]
-            [cognitect.transit :as transit])
+  (:require [om.core          :as om  :include-macros true]
+            [om.dom           :as dom :include-macros true]
+            [json-viewer.util :as util])
   (:require-macros [om-utils.core :refer [defcomponent]]))
-
-(defn parse-json
-  [raw-json]
-  (let [r (transit/reader :json)]
-    (transit/read r raw-json)))
 
 (defn display-child-nodes
   [data {:keys [node-text]}]
   (-> data
       :json
-      parse-json
+      util/parse-json
       (get node-text)
       println))
 
@@ -26,7 +21,7 @@
 (defn build-nodes
   [data raw-json]
   (->> raw-json
-       parse-json
+       util/parse-json
        keys
        (map name)
        (map (fn [node-text]
