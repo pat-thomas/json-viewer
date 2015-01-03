@@ -10,12 +10,17 @@
     (transit/read r raw-json)))
 
 (defn display-child-nodes
-  [])
+  [data {:keys [node-text]}]
+  (-> data
+      :json
+      parse-json
+      (get node-text)
+      println))
 
 (defcomponent json-node
   (render
    (dom/div #js {:className   "js-node"
-                 :onMouseOver display-child-nodes}
+                 :onMouseOver #(display-child-nodes data opts)}
             (:node-text opts))))
 
 (defn build-nodes
